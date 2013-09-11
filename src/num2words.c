@@ -93,12 +93,9 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
   int fuzzy_minutes = ((minutes + 2) / 5) * 5;
 
   // Handle hour & minute roll-over.
-  if (fuzzy_minutes > 50) {
-    //fuzzy_minutes = 0;
+  if (fuzzy_minutes >= 53) {
     fuzzy_hours += 1;
-    if (fuzzy_hours > 23) {
-      fuzzy_hours = 0;
-    }
+    // if it is 24 it will be reset below modulus 12
   }
 
   size_t remaining = length;
@@ -125,13 +122,11 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
       remaining -= append_string(words, remaining, " ");
   }
 
+  fuzzy_hours = fuzzy_hours % 12;
   if (fuzzy_hours == 0) {
-    remaining -= append_string(words, remaining, STR_MIDNIGHT);
-  } else if (fuzzy_hours == 12) {
-    remaining -= append_string(words, remaining, STR_NOON);
-  } else {
-    remaining -= append_number(words, fuzzy_hours % 12);
+      fuzzy_hours = 12;
   }
+  remaining -= append_number(words, fuzzy_hours);
 
   if (fuzzy_minutes >= 3 && fuzzy_minutes < 8) {
       remaining -= append_string(words, remaining, " ");
