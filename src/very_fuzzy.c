@@ -7,7 +7,7 @@
 #define MY_UUID { 0x3B, 0x38, 0x76, 0x74, 0x3E, 0x98, 0x4A, 0x54, 0xB8, 0x68, 0x1A, 0xE3, 0x16, 0xF0, 0xEA, 0xBC }
 PBL_APP_INFO(MY_UUID,
              "Very Fuzzy", "foobacca.co.uk",
-             1, 0, /* App version */
+             1, 1, /* App version */
              DEFAULT_MENU_ICON,
              APP_INFO_WATCH_FACE);
 

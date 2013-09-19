@@ -51,6 +51,8 @@ static const char* STR_MIDNIGHT = "midnight";
 
 static const char* STR_HALF = "half";
 static const char* STR_ALMOST = "almost";
+static const char* STR_GETTING = "getting on for";
+static const char* STR_WELL = "well";
 static const char* STR_PAST = "past";
 static const char* STR_ISH = "ish";
 static const char* STR_OR_SO = "or so";
@@ -93,7 +95,7 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
   int fuzzy_minutes = ((minutes + 2) / 5) * 5;
 
   // Handle hour & minute roll-over.
-  if (fuzzy_minutes >= 53) {
+  if (fuzzy_minutes >= 48) {
     fuzzy_hours += 1;
     // if it is 24 it will be reset below modulus 12
   }
@@ -101,16 +103,13 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
   size_t remaining = length;
   memset(words, 0, length);
 
-  if (fuzzy_minutes >= 13 && fuzzy_minutes < 23) {
+  if (fuzzy_minutes >= 13 && fuzzy_minutes < 18) {
       remaining -= append_string(words, remaining, STR_PAST);
       remaining -= append_string(words, remaining, " ");
-  } else if (fuzzy_minutes >= 43 && fuzzy_minutes < 53) {
+  } else if (fuzzy_minutes >= 18 && fuzzy_minutes < 23) {
+      remaining -= append_string(words, remaining, STR_WELL);
+      remaining -= append_string(words, remaining, " ");
       remaining -= append_string(words, remaining, STR_PAST);
-      remaining -= append_string(words, remaining, " ");
-      remaining -= append_string(words, remaining, STR_HALF);
-      remaining -= append_string(words, remaining, " ");
-  } else if (fuzzy_minutes >= 53 && fuzzy_minutes < 58) {
-      remaining -= append_string(words, remaining, STR_ALMOST);
       remaining -= append_string(words, remaining, " ");
   } else if (fuzzy_minutes >= 23 && fuzzy_minutes < 28) {
       remaining -= append_string(words, remaining, STR_ALMOST);
@@ -119,6 +118,17 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
       remaining -= append_string(words, remaining, " ");
   } else if (fuzzy_minutes >= 28 && fuzzy_minutes < 43) {
       remaining -= append_string(words, remaining, STR_HALF);
+      remaining -= append_string(words, remaining, " ");
+  } else if (fuzzy_minutes >= 43 && fuzzy_minutes < 48) {
+      remaining -= append_string(words, remaining, STR_PAST);
+      remaining -= append_string(words, remaining, " ");
+      remaining -= append_string(words, remaining, STR_HALF);
+      remaining -= append_string(words, remaining, " ");
+  } else if (fuzzy_minutes >= 48 && fuzzy_minutes < 53) {
+      remaining -= append_string(words, remaining, STR_GETTING);
+      remaining -= append_string(words, remaining, " ");
+  } else if (fuzzy_minutes >= 53 && fuzzy_minutes < 58) {
+      remaining -= append_string(words, remaining, STR_ALMOST);
       remaining -= append_string(words, remaining, " ");
   }
 
