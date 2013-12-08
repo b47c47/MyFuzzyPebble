@@ -1,0 +1,15 @@
+{
+  "uuid": "3b387674-3e98-4a54-b868-1ae316f0eabc",
+  "shortName": "Very Fuzzy",
+  "longName": "Very Fuzzy",
+  "companyName": "foobacca.co.uk",
+  "versionCode": 1,
+  "versionLabel": "2.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {},
+  "resources": {
+    "media": []
+  }
+}
